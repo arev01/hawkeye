@@ -34,15 +34,15 @@ elif geometry == "Use existing file":
 elif geometry == "Generate a new file":
     container = st.container(border=True)
     
-    st.markdown("#### Generate new design")
+    container.markdown("#### Generate new design")
 
-    geomai_project = st.selectbox(
+    geomai_project = container.selectbox(
         "Project",
         ("Email", "Home phone", "Mobile phone"),
         key="geomai_project"
     )
     
-    geomai_workspace = st.selectbox(
+    geomai_workspace = container.selectbox(
         "Workspace",
         ("Email", "Home phone", "Mobile phone"),
         key="geomai_workspace"
@@ -52,7 +52,7 @@ elif geometry == "Generate a new file":
     container.slider("Latent parameters", key="lp2")
     container.slider("Latent parameters", key="lp3")
     
-    st.button("Generate")
+    container.button("Generate")
 
 st.text_input("Boundary conditions")
 
