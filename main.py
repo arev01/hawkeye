@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 
 st.title("👋 Welcome to hawkeye!")
 
