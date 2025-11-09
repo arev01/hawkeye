@@ -53,7 +53,7 @@ elif choice == "Use existing file":
 
 elif choice == "Generate a new file":
     container = st.container(border=True)
-    container.st.slider("Latent parameters")
+    container.slider("Latent parameters")
 
 st.text_input("Boundary conditions")
 
