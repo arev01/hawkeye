@@ -1,45 +1,6 @@
 import streamlit as st
 import time
 
-from contextlib import contextmanager
-
-HORIZONTAL_STYLE = """
-<style class="hide-element">
-    /* Hides the style container and removes the extra spacing */
-    .element-container:has(.hide-element) {
-        display: none;
-    }
-    /*
-        The selector for >.element-container is necessary to avoid selecting the whole
-        body of the streamlit app, which is also a stVerticalBlock.
-    */
-    div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) {
-        display: flex;
-        flex-direction: row !important;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        align-items: baseline;
-    }
-    /* Buttons and their parent container all have a width of 704px, which we need to override */
-    div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) div {
-        width: max-content !important;
-    }
-    /* Just an example of how you would style buttons, if desired */
-    /*
-    div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) button {
-        border-color: red;
-    }
-    */
-</style>
-"""
-
-@contextmanager
-def st_horizontal():
-    st.markdown(HORIZONTAL_STYLE, unsafe_allow_html=True)
-    with st.container():
-        st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
-        yield
-
 st.title("👋 Welcome to hawkeye!")
 
 st.markdown("A Graphical User Interface (GUI) built around [PySimAI](https://simai.docs.pyansys.com).")
@@ -72,8 +33,8 @@ workspace = st.selectbox(
     "Workspace",
     ("Email", "Home phone", "Mobile phone"),
 )
-choice = st.radio(
-    "Choice",
+geometry = st.radio(
+    "Geometry",
     (
         "Upload a new file",
         "Use existing file",
@@ -81,27 +42,30 @@ choice = st.radio(
     ),
 )
 
-if choice == "Upload a new file":
-    st.file_uploader("Geometry")
+if geometry == "Upload a new file":
+    st.file_uploader("")
 
-elif choice == "Use existing file":
+elif geometry == "Use existing file":
     st.selectbox(
-        "Geometry",
+        "",
         ("Email", "Home phone", "Mobile phone"),
     )
 
-elif choice == "Generate a new file":
+elif geometry == "Generate a new file":
     container = st.container(border=True)
+    st.markdown("#### Generate new design")
     container.slider("Latent parameters", key="lp1")
     container.slider("Latent parameters", key="lp2")
     container.slider("Latent parameters", key="lp3")
+    if container.button("Generate"):
+        with st.spinner("Wait for it..."):
+            time.sleep(5)
+    container.button("Download", disabled=True)
 
 st.text_input("Boundary conditions")
 
-with st_horizontal():
-    predict = st.button("Predict")            
-    download = st.button("Download", disabled=True)
-
-if predict == True:
+if st.button("Predict"):
     with st.spinner("Wait for it..."):
         time.sleep(5)
+st.button("Download", disabled=True)
+
