@@ -1,6 +1,6 @@
 import streamlit as st
 import time
-from utils import functions.viewer
+from utils.functions import viewer
 
 
 simai_project = st.selectbox(
