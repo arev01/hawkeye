@@ -99,8 +99,9 @@ elif choice == "Generate a new file":
 st.text_input("Boundary conditions")
 
 with st_horizontal():
-    if st.button("Predict"):
-        with st.spinner("Wait for it..."):
-            time.sleep(5)
-            
-    st.button("Download", disabled=True)
+    predict = st.button("Predict")            
+    download = st.button("Download", disabled=True)
+
+if predict == True:
+    with st.spinner("Wait for it..."):
+        time.sleep(5)
