@@ -72,10 +72,6 @@ if st.button("Predict"):
         
 st.button("Download", disabled=True)
 
-st.feedback("Confidence score")
-
-st.markdown("Global coefficients")
-
 ## Create coordinate data
 x = np.arange(-10, 10, 0.25)
 y = np.arange(-10, 10, 0.25)
