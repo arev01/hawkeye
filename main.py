@@ -80,7 +80,7 @@ elif geometry == "Generate a new file":
     container.slider("Latent parameters", key="lp3")
     
     if container.button("Generate"):
-        with st.spinner("Wait for it..."):
+        with container.spinner("Wait for it..."):
             time.sleep(5)
 
 st.text_input("Boundary conditions")
