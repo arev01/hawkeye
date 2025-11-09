@@ -4,7 +4,7 @@ from stpyvista import stpyvista
 
 from stpyvista.utils import start_xvfb
 
-@st.dialog
+@st.dialog("3D viewer", width="large")
 def viewer():
 
     if "IS_XVFB_RUNNING" not in st.session_state:
