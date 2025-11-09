@@ -16,11 +16,11 @@ with st.sidebar.form("Login"):
     password = st.text_input("Password", type="password")
     submit = st.form_submit_button("Login")
 
-if submit and email == actual_email and password == actual_password:
+if submit and ( email == actual_email and password == actual_password ):
     # If the form is submitted and the email and password are correct,
     # Display a success message
     st.sidebar.success("Login successful")
-elif submit and email != actual_email and password != actual_password:
+elif submit and ( email != actual_email or password != actual_password ):
     st.sidebar.error("Login failed")
 else:
     pass
@@ -43,7 +43,7 @@ choice = st.radio(
 )
 
 if choice == "Upload a new file":
-    st.file_uploader("")
+    st.file_uploader("Geometry")
 
 elif choice == "Use existing file":
     st.selectbox(
@@ -53,12 +53,14 @@ elif choice == "Use existing file":
 
 elif choice == "Generate a new file":
     container = st.container(border=True)
-    container.slider("Latent parameters")
+    container.slider("Latent parameters", key="lp1")
+    container.slider("Latent parameters", key="lp2")
+    container.slider("Latent parameters", key="lp3")
 
 st.text_input("Boundary conditions")
 
 if st.button("Predict"):
-    st.spinner("Wait for it...")
-    time.sleep(5)
+    with st.spinner("Wait for it..."):
+        time.sleep(5)
 
 st.button("Download", disabled=True)
