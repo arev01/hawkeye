@@ -1,14 +1,5 @@
 import streamlit as st
 import time
-import pyvista as pv
-import numpy as np
-from stpyvista import stpyvista
-
-from stpyvista.utils import start_xvfb
-
-if "IS_XVFB_RUNNING" not in st.session_state:
-  start_xvfb()
-  st.session_state.IS_XVFB_RUNNING = True
 
 
 simai_project = st.selectbox(
@@ -70,19 +61,31 @@ if st.button("Predict"):
     with st.spinner("Wait for it..."):
         time.sleep(5)
         
-st.button("Download", disabled=True)
+if st.button("Download"):
+    import pyvista as pv
+    from stpyvista import stpyvista
 
-## Create coordinate data
-x = np.arange(-10, 10, 0.25)
-y = np.arange(-10, 10, 0.25)
-x, y = np.meshgrid(x, y)
-z = np.sin(np.sqrt(x**2 + y**2))
+    from stpyvista.utils import start_xvfb
 
-## Set up plotter
-plotter = pv.Plotter(window_size=[600,600])
-surface = pv.StructuredGrid(x, y, z)
-plotter.add_mesh(surface, color='teal', show_edges=True)
+    if "IS_XVFB_RUNNING" not in st.session_state:
+      start_xvfb()
+      st.session_state.IS_XVFB_RUNNING = True
 
-## Pass the plotter (not the mesh) to stpyvista
-stpyvista(plotter, key="surface")
+    ## Initialize a plotter object
+    plotter = pv.Plotter(window_size=[400,400])
 
+    ## Create a mesh with a cube 
+    mesh = pv.Cube(center=(0,0,0))
+
+    ## Add some scalar field associated to the mesh
+    mesh['myscalar'] = mesh.points[:, 2] * mesh.points[:, 0]
+
+    ## Add mesh to the plotter
+    plotter.add_mesh(mesh, scalars='myscalar', cmap='bwr')
+
+    ## Final touches
+    plotter.view_isometric()
+    plotter.background_color = 'white'
+
+    ## Send to streamlit
+    stpyvista(plotter, key="pv_cube")
