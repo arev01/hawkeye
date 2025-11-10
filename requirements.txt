@@ -1,4 +1,5 @@
 streamlit
+ansys.simai.core
 pyvista
 numpy
 stpyvista
