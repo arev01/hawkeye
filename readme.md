@@ -4,12 +4,14 @@ A Graphical User Interface (GUI) built around [PySimAI](https://simai.docs.pyans
 ## Getting started
 The tool uses the open-source Python framework [Streamlit](https://docs.streamlit.io/#).
 
-First, install all the packages listed in the *requirements.txt* file by using the following command in your terminal:
+First, download and extract the repository as a zip file to your own (local) computer.
+
+Then, install all the packages listed in the *requirements.txt* file by using the following command in your terminal:
 ```
 pip install -r requirements.txt
 ```
 
-Then, use:
+Finally, use:
 ```
 streamlit run main.py
 ```
