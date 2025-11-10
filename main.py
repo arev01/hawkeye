@@ -7,8 +7,8 @@ st.markdown("A Graphical User Interface (GUI) built around [PySimAI](https://sim
 
 st.markdown(
     """
-    👈 Write something here
-    👈 Write something here
-    👈 Write something here
+    👈 Write something here  
+    👈 Write something here  
+    👈 Write something here  
     """
 )
