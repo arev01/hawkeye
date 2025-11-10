@@ -3,6 +3,8 @@ import time
 from utils.functions import viewer
 
 
+st.title("⚗️ Prediction")
+
 simai_project = st.selectbox(
     "Project",
     ("Email", "Home phone", "Mobile phone"),
