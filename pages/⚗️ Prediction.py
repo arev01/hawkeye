@@ -1,24 +1,27 @@
 import streamlit as st
 import time
 from utils.functions import viewer
+from ansys.simai.core import SimAIClient
 
 
 st.title("⚗️ Prediction")
 
-simai_project = st.selectbox(
+PROJECT_NAME = st.selectbox(
     "Project",
-    ("Email", "Home phone", "Mobile phone"),
+    (i.name for i in st.session_state["client"].projects.list()),
     key="simai_project"
 )
+project = st.session_state["client"].projects.get(name=PROJECT_NAME)
 
-simai_workspace = st.selectbox(
+WORKSPACE_NAME = st.selectbox(
     "Workspace",
-    ("Email", "Home phone", "Mobile phone"),
+    (i.name for i in project.workspaces()),
     key="simai_workspace"
 )
+workspace = st.session_state["client"].workspaces.get(name=WORKSPACE_NAME)
 
-geometry = st.radio(
-    "Geometry",
+choice = st.radio(
+    "Choice",
     (
         "Upload a new file",
         "Use existing file",
@@ -26,16 +29,18 @@ geometry = st.radio(
     ),
 )
 
-if geometry == "Upload a new file":
-    st.file_uploader("")
+if choice == "Upload a new file":
+    st.file_uploader("Geometry")
+    st.success("File successfully uploaded")
 
-elif geometry == "Use existing file":
-    st.selectbox(
-        "",
-        ("Email", "Home phone", "Mobile phone"),
+elif choice == "Use existing file":
+    GEOMETRY_NAME = st.selectbox(
+        "Geometry",
+        (i.name for i in st.session_state["client"].geometries.list(workspace=workspace)),
     )
+    geometry = st.session_state["client"].geometries.get(name=GEOMETRY_NAME)
 
-elif geometry == "Generate a new file":
+elif choice == "Generate a new file":
     with st.container(border=True):
     
         st.markdown("#### Generate new design")
