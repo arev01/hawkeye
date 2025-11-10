@@ -21,7 +21,7 @@ def viewer():
     mesh['myscalar'] = mesh.points[:, 2] * mesh.points[:, 0]
 
     ## Add mesh to the plotter
-    plotter.add_mesh(mesh, scalars='myscalar', cmap='bwr')
+    plotter.add_mesh(mesh, scalars='myscalar', cmap='inferno')
 
     ## Final touches
     plotter.view_isometric()
