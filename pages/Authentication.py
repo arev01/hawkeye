@@ -1,7 +1,9 @@
 import streamlit as st
 import ansys.simai.core
 
-# Insert a form in the sidebar
+st.title("🔑 Authentication")
+
+# Insert a form
 with st.form("Login"):
     st.markdown("#### Enter your credentials")
     
