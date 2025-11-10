@@ -1,7 +1,8 @@
 import streamlit as st
 import ansys.simai.core
 
-st.title("🔑 Authentication")
+
+st.title("🔐 Authentication")
 
 # Insert a form
 with st.form("Login"):
